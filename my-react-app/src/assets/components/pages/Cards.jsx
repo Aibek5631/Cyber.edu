@@ -1,4 +1,3 @@
-// src/assets/components/pages/cards.jsx
 import React, { useState } from "react";
 import "../styles/Cards.css"
 
@@ -9,7 +8,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "4" },
       { id: "b", text: "5" },
-      { id: "c", text: "6" }
+      { id: "c", text: "6" },
+      { id: "d", text: "3" }
     ],
     correct: "b"
   },
@@ -19,7 +19,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "24" },
       { id: "b", text: "30" },
-      { id: "c", text: "20" }
+      { id: "c", text: "20" },
+      { id: "d", text: "36" }
     ],
     correct: "b"
   },
@@ -29,7 +30,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "Terrorists" },
       { id: "b", text: "Counter-Terrorists" },
-      { id: "c", text: "Обе" }
+      { id: "c", text: "Обе" },
+      { id: "d", text: "Спецназ" }
     ],
     correct: "a"
   },
@@ -39,7 +41,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "Glock-18" },
       { id: "b", text: "USP-S" },
-      { id: "c", text: "Desert Eagle" }
+      { id: "c", text: "Desert Eagle" },
+      { id: "d", text: "P250" }
     ],
     correct: "b"
   },
@@ -49,7 +52,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "Smoke Grenade" },
       { id: "b", text: "Molotov" },
-      { id: "c", text: "Flashbang" }
+      { id: "c", text: "Flashbang" },
+      { id: "d", text: "Decoy" }
     ],
     correct: "c"
   },
@@ -59,7 +63,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "35" },
       { id: "b", text: "45" },
-      { id: "c", text: "55" }
+      { id: "c", text: "55" },
+      { id: "d", text: "60" }
     ],
     correct: "b"
   },
@@ -69,7 +74,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "Dust II" },
       { id: "b", text: "Inferno" },
-      { id: "c", text: "Nuke" }
+      { id: "c", text: "Nuke" },
+      { id: "d", text: "Mirage" }
     ],
     correct: "a"
   },
@@ -79,7 +85,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "Knife Round" },
       { id: "b", text: "Eco Round" },
-      { id: "c", text: "Pistol Round" }
+      { id: "c", text: "Pistol Round" },
+      { id: "d", text: "Save Round" }
     ],
     correct: "a"
   },
@@ -89,7 +96,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "Bowie Knife" },
       { id: "b", text: "Butterfly Knife" },
-      { id: "c", text: "Karambit" }
+      { id: "c", text: "Karambit" },
+      { id: "d", text: "Falchion Knife" }
     ],
     correct: "c"
   },
@@ -99,7 +107,8 @@ const sampleQuiz = [
     options: [
       { id: "a", text: "HE Grenade" },
       { id: "b", text: "Incendiary / Molotov" },
-      { id: "c", text: "Decoy Grenade" }
+      { id: "c", text: "Decoy Grenade" },
+      { id: "d", text: "Flashbang" }
     ],
     correct: "b"
   }
@@ -109,13 +118,13 @@ export default function Cards() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
-  const [results, setResults] = useState({}); // { qId: boolean }
+  const [results, setResults] = useState({}); 
   const [showSummary, setShowSummary] = useState(false);
 
   const question = sampleQuiz[currentIndex];
 
   const handleOptionSelect = (optId) => {
-    if (results[question.id] != null) return; // не менять уже посчитанный ответ
+    if (results[question.id] != null) return;
 
     const correct = optId === question.correct;
     setSelectedOption(optId);
@@ -154,14 +163,11 @@ export default function Cards() {
     resetQuestionState();
   };
 
-  // Считаем правильные и неправильные ответы
   const correctCount = Object.values(results).filter((v) => v).length;
   const wrongCount = Object.values(results).filter((v) => !v).length;
-  // Прогресс в процентах
 const progressPercent = ((currentIndex + 1) / sampleQuiz.length) * 100;
 
 
-  // Финальный экран после завершения всех вопросов
   if (showSummary) {
     return (
       <div className="quiz-summary">

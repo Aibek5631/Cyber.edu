@@ -25,11 +25,9 @@ export default function HomePage() {
       <Hero
         title="Учись онлайн с комфортом"
         subtitle="Видео-курсы, менторская поддержка и сертификаты"
-        ctaText="Начать обучение"
         ctaLink="/courses"
       />
 
-      {/* Новый блок CTA */}
       <div className="community-cta">
         <p>🚀 Присоединяйтесь к нашему IT-комьюнити в Discord</p>
         <a
@@ -60,7 +58,6 @@ export default function HomePage() {
         />
       </section>
 
-      {/* Новый блок “Почему выбирают нас” */}
       <section className="why-us">
         <h2>Почему выбирают CyberUde.kz?</h2>
         <ul>
@@ -96,9 +93,6 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-        <Link to="/courses" className="home-page__more">
-          Смотреть все курсы →
-        </Link>
         <div className="free-trial">
           <Link to="/register" className="trial-btn">
             Попробовать бесплатно →
@@ -106,7 +100,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Мини-футер */}
       <footer className="footer">
         <p>© 2025 CyberUde.kz — Платформа обучения IT</p>
         <nav>
