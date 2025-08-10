@@ -20,9 +20,8 @@ export default function Courses() {
   const [visible, setVisible] = useState(false);
   const [editCourse, setEditCourse] = useState(null);
 
-  // берём только user из хука
   const { user } = useAuth();
-  // вычисляем isAdmin на основе user.role
+  
   const isAdmin = user?.role === "admin";
 
   console.log("👀 isAdmin:", isAdmin, "current user:", user);
