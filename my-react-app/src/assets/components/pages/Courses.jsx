@@ -21,14 +21,16 @@ export default function Courses() {
   const [editCourse, setEditCourse] = useState(null);
 
   const { user } = useAuth();
-  
   const isAdmin = user?.role === "admin";
-
-  console.log("👀 isAdmin:", isAdmin, "current user:", user);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "courses"), (snapshot) => {
-      setCourses(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
+      const raw = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+      // Удаляем дубликаты по id
+      const unique = Array.from(new Map(raw.map(c => [c.id, c])).values());
+
+      setCourses(unique);
     });
     return () => unsub();
   }, []);
@@ -108,20 +110,16 @@ export default function Courses() {
 
       <main className="courses-main">
         <div className="courses-list">
-          {filtered.map((c) => (
+          {filtered.map((c, index) => (
             <CourseCard
-              key={c.id}
+              key={`${c.id}-${index}`} // гарантированно уникальный ключ
               course={c}
               isAdmin={isAdmin}
-              onEdit={
-                isAdmin
-                  ? (course) => {
-                      setEditCourse(course);
-                      setVisible(true);
-                    }
-                  : undefined
-              }
-              onDelete={isAdmin ? handleDelete : undefined}
+              onEdit={() => {
+                setEditCourse(c);
+                setVisible(true);
+              }}
+              onDelete={() => handleDelete(c.id)}
             />
           ))}
         </div>
